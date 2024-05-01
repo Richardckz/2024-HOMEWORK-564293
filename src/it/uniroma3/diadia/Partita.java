@@ -1,48 +1,51 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
-
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
  * Questa classe modella una partita del gioco
  *
- * @author  docente di POO
- * @see Stanza
- * @version base
+ * @author  docente di POO & 564293
+ * 
+ * @see Labirinto
+ * @see Giocatore
+ * @version 2.0
  */
 
 public class Partita {
 
-
-
-	private Labirinto labirinto;
 	private Giocatore giocatore;
+    private Labirinto labirinto; 
 	private boolean finita;
 
+	/**
+	 * Metodo che crea un labirinto e un nuovo giocatore
+	 */
 	public Partita(){
-		labirinto = new Labirinto();
-		giocatore = new Giocatore();
-		labirinto.creaStanze();
+		giocatore= new Giocatore();
+		labirinto= new Labirinto();
+	    labirinto.creaStanze();
 		this.finita = false;
 	}
-
-	public Labirinto getLabirinto(){
+	
+	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto=labirinto;
+	}
+	
+	
+	public Labirinto getLabirinto() {
 		return labirinto;
 	}
-
-	public void setLabirinto(Labirinto labirinto) {
-		this.labirinto = labirinto;
+	
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore=giocatore;
 	}
-
-
+	
 	public Giocatore getGiocatore() {
 		return giocatore;
 	}
 
-	public void setGiocatore(Giocatore giocatore) {
-		this.giocatore = giocatore;
-	}
 
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
@@ -68,4 +71,5 @@ public class Partita {
 		this.finita = true;
 	}
 
+	
 }

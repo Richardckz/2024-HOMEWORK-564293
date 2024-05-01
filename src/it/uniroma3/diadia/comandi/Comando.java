@@ -1,7 +1,11 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.comandi;
 
 
-import java.util.Scanner;
+import it.uniroma3.diadia.IO;
+
+//import java.util.Scanner;
+
+import it.uniroma3.diadia.Partita;
 
 /**
  * Questa classe modella un comando.
@@ -12,19 +16,36 @@ import java.util.Scanner;
  *  corrisponde un comando di nome "vai" e parametro "nord").
  *
  * @author  docente di POO 
- * @version base
+ * @version 2.0
  */
 
-public class Comando {
+public interface Comando {
 
+	/**
+	* esecuzione del comando
+	*/
+	public void esegui(Partita partita);
+	
+	/**
+	* set parametro del comando
+	*/
+	public void setParametro(String parametro);
+	
+	public String getNome();
+	
+	public String getParametro();
+	
+	public void setIO(IO io);
+	
+	/*
     private String nome;
     private String parametro;
-
+*/
     /**
      * Metodo che prende una stringa e crea un comando
      * @param istruzione
      */
-    public Comando(String istruzione) {
+  /*  public Comando(String istruzione) {
 		Scanner scannerDiParole = new Scanner(istruzione);
 
 		// prima parola: nome del comando
@@ -46,5 +67,5 @@ public class Comando {
 
     public boolean sconosciuto() {
         return (this.nome == null);
-    }
+    }*/
 }

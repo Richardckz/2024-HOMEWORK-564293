@@ -1,33 +1,44 @@
+/**
+ * 
+ */
 package it.uniroma3.diadia.giocatore;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-
+/**
+ * Giocatore: classe che si occupa di gestire il giocatore e creare la borsa
+ * 
+ * @author 564293
+ * 
+ * @see Borsa
+ * 
+ * @version 2.0
+ */
 public class Giocatore {
-    static final private int CFU_INIZIALI = 20; // Costante che rappresenta i CFU iniziali del giocatore
-
-    private int cfu; // Punti CFU del giocatore
-    private Borsa borsa; // La borsa del giocatore, che contiene gli attrezzi
-    
-    public Giocatore() {
-        this.cfu = CFU_INIZIALI; // Imposta i CFU iniziali
-        this.borsa = new Borsa(); // Crea una nuova borsa vuota per il giocatore
-    }
-
-    public int getCfu() {
-        return this.cfu; // Restituisce i CFU del giocatore
-    }
-
-    public void setCfu(int cfu) {
-        this.cfu = cfu; // Imposta i CFU del giocatore
-    }
-
-    public Borsa getBorsa() {
-        return borsa; // Restituisce la borsa del giocatore
-    }
-
-    public void setBorsa(Borsa borsa) {
-        this.borsa = borsa; // Imposta la borsa del giocatore
-    }
 	
+	static final private int CFU_INIZIALI = 20;
+	private int cfu;
+	private Borsa borsa;
 	
+	/**
+	 * Metodo che imposta i cfu e crea la borsa
+	 */
+	public Giocatore() {
+		this.cfu = CFU_INIZIALI;
+		this.borsa = new Borsa();
+	}
+	
+	public int getCfu() {
+		return this.cfu;
+	}
+
+	public void setCfu(int cfu) {
+		this.cfu = cfu;		
+	}	
+	
+	public void setBorsa(Borsa borsa) {
+		this.borsa=borsa;
+	}
+	
+	public Borsa getBorsa() {
+		return borsa;
+	}
 }
