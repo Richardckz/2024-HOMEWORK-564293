@@ -1,42 +1,20 @@
 package it.uniroma3.diadia.ambienti;
 
-/**
- * StanzaBloccata - Classe che costruisce una stanza della partita buia,
- * e per vedere all'interno della Stanza, vi è bisogno di uno attrezzo apposito
- * 
- * @author 564293
- * 
- * @see Stanza
- * 
- * @version 2.0
- */
-
 public class StanzaBuia extends Stanza {
-	private String nomeAttrezzo;
+
+	private  String attrezzoLucente;
 	
-	/**
-	 * Metodo costruttore che implementa una Stanza Buia
-	 * @param nome
-	 * @param nomeAttrezzo
-	 */
-	public StanzaBuia(String nome, String nomeAttrezzo) {
+	public StanzaBuia(String nome , String attrezzoLucente) {
 		super(nome);
-		this.nomeAttrezzo=nomeAttrezzo;
+		this.attrezzoLucente = attrezzoLucente;
 	}
-	
-	/**
-	 * Metodo sovrascritto che ritorna una descrizione della stanza se è presente l'attrezzo richiesto,
-	 * oppure ritorna una descrizione "qui c'è buio pesto"
-	 * 
-	 * @return buio o la descrizione della stanza
-	 */
+
 	@Override
 	public String getDescrizione() {
-		String buio=new String();
-		buio="qui c'è buio pesto";
-		if(!this.hasAttrezzo(nomeAttrezzo))
+		String buio = new String();
+		buio = "qui c'è un buio pesto";
+		if(!this.hasAttrezzo(attrezzoLucente))
 			return buio;
-		
-        return super.getDescrizione();
-    }
+		return super.getDescrizione();
+	}
 }

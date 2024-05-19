@@ -1,37 +1,36 @@
 package it.uniroma3.diadia.ambienti;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-class StanzaBuiaTest {
+public class StanzaBuiaTest {
 
-	Stanza s1;
-	Stanza s2;
-	Attrezzo lampada;
-	String buio;
-	
-	@BeforeEach
-	void setUp() throws Exception {
-		s1=new StanzaBuia("salone", "lampada");
-		s2=new Stanza("cucina");
-		buio="qui c'è buio pesto";
-		lampada=new Attrezzo("lampada", 3);
-		
-		s1.impostaStanzaAdiacente("est", s2);
+	private StanzaBuia stanza;
+	private Attrezzo lumino;
+	@Before
+	public void setUp() throws Exception {
+		stanza = new StanzaBuia("StanzaBuia", "lumino");
+		lumino = new Attrezzo("lumino", 1);
+	}
+
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	void testGetDescrizioneSenzaAttrezzo() {
-		assertEquals(s1.getDescrizione(), buio);
+	public void testGetDescrizioneConAttrezzo() {
+		stanza.addAttrezzo(lumino);
+		assertEquals(stanza.toString(), stanza.getDescrizione());
 	}
 	
 	@Test
-	void testGetDescrizioneConAttrezzo() {
-		s1.addAttrezzo(lampada);
-		assertNotEquals(s1.getDescrizione(), buio);
+	public void testGetDescrizioneSenzaAttrezzo() {
+		String e = "qui c'è un buio pesto";
+		assertEquals(e, stanza.getDescrizione());
 	}
-
 }

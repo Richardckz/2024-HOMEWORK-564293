@@ -1,51 +1,35 @@
 package it.uniroma3.diadia.ambienti;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class StanzaTest {
-	
-	Stanza s1=new Stanza("s1");
-	Stanza s2=new Stanza("s2");
-	Attrezzo a=new Attrezzo("a", 10);
-	Attrezzo b=new Attrezzo("b", 4);
-	Attrezzo c=new Attrezzo("c", 7);
+public class StanzaTest {	
 
-	
-	
-	@Test
-	public void testImpostaStanzaAdiacente() {	
-		s1.impostaStanzaAdiacente("nord", s2);	
-		assertEquals(s2,s1.getStanzaAdiacente("nord"));
-	}
-
+	Stanza s1 = new Stanza("s1");
+	Stanza s2= new Stanza("s2");
+	Attrezzo m = new Attrezzo("martello", 42);
 	@Test
 	public void testGetStanzaAdiacente() {
-		assertNull(s1.getStanzaAdiacente("nord"));
+		assertNull(s1.getStanzaAdiacente("sud"));
 	}
+	
 
 	@Test
+	public void testImpostaStanzaAdiacente() {
+		s1.impostaStanzaAdiacente("sud", s2);
+		assertEquals(s2, s1.getStanzaAdiacente("sud"));
+	}
+	
+	@Test
 	public void testAddAttrezzo() {
-		assertTrue(s1.addAttrezzo(a));
+		
+		assertTrue(s1.addAttrezzo(m));
 	}
 	
-	@Test
-	public void testRemoveAttrezzo() {
-		s1.addAttrezzo(a);
-		s1.addAttrezzo(b);
-		s1.addAttrezzo(c);
-		assertTrue(s1.removeAttrezzo(b));
-		
-	}
-	
-	@Test
-	public void testHasAttrezzo() {
-		s1.addAttrezzo(a);
-		s1.addAttrezzo(b);
-		s1.addAttrezzo(c);
-		assertTrue(s1.hasAttrezzo("c"));
-		
-	}
+
 }

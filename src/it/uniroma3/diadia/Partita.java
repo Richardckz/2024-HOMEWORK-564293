@@ -1,51 +1,48 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Stanza;
+
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
  * Questa classe modella una partita del gioco
  *
- * @author  docente di POO & 564293
- * 
- * @see Labirinto
- * @see Giocatore
- * @version 2.0
+ * @author  docente di POO
+ * @see Stanza
+ * @version base
  */
 
 public class Partita {
 
+
+
+	private Labirinto labirinto;
 	private Giocatore giocatore;
-    private Labirinto labirinto; 
 	private boolean finita;
 
-	/**
-	 * Metodo che crea un labirinto e un nuovo giocatore
-	 */
-	public Partita(){
-		giocatore= new Giocatore();
-		labirinto= new Labirinto();
-	    labirinto.creaStanze();
+	public Partita(Labirinto labirinto){
+		this.labirinto = labirinto;
+		giocatore = new Giocatore();
+		//labirinto.creaStanze();
 		this.finita = false;
 	}
-	
-	
-	public void setLabirinto(Labirinto labirinto) {
-		this.labirinto=labirinto;
-	}
-	
-	
-	public Labirinto getLabirinto() {
+
+	public Labirinto getLabirinto(){
 		return labirinto;
 	}
-	
-	public void setGiocatore(Giocatore giocatore) {
-		this.giocatore=giocatore;
+
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
 	}
-	
+
+
 	public Giocatore getGiocatore() {
 		return giocatore;
 	}
 
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore = giocatore;
+	}
 
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
@@ -71,5 +68,17 @@ public class Partita {
 		this.finita = true;
 	}
 
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu()>0;
+	}
 	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.getLabirinto().setStanzaCorrente(stanzaCorrente);
+	}
+
+	public Stanza getStanzaCorrente() {
+		return this.getLabirinto().getStanzaCorrente();
+	}
+	
+
 }

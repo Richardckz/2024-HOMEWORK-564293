@@ -3,56 +3,40 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-/**
- * ComandoGuarda - classe che crea un comando e stampa una descrizione attuale della partita
- * 
- * @author 564293
- * 
- * @see Comando
- * @see IO
- * @see Partita
- * 
- * @version 2.0
- */
 public class ComandoGuarda implements Comando {
 
-	private IO console;
-	private static final String NOME="guarda";
-	
-	/**
-	 * Metodo che stampa le informazioni della partita
-	 * @param partita
-	 */
+	private IO io;
+	private final static String NOME = "guarda";
+
+
 	@Override
 	public void esegui(Partita partita) {
-		console.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getDescrizione());
-		console.mostraMessaggio("Borsa:");
-		console.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
-		console.mostraMessaggio("I CFU rimanenti al giocatore sono:");
-		console.mostraMessaggio(partita.getGiocatore().getCfu()+" CFU.\n");
+		io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+		io.mostraMessaggio("Hai ancora: "+partita.getGiocatore().getCfu()+ "CFU");
+		io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
+
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-	}
+		// TODO Auto-generated method stub
 
-	/**
-	 * Metodo che ritorna il nome del comando
-	 * @return NOME
-	 */
-	@Override
-	public String getNome() {
-		return NOME;
 	}
 
 	@Override
 	public String getParametro() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+
 	@Override
-	public void setIO(IO io) {
-		this.console=io;
+	public void setIo(IO io) {
+		this.io = io;
 	}
 
+	@Override
+	public String getNome() {
+		return NOME;
+	}
 }

@@ -3,53 +3,41 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-/**
- * ComandoFine - classe che crea un comando e stampa un messaggio di fine gioco
- * 
- * @author 564293
- * 
- * @see Comando
- * @see IO
- * @see Partita
- * 
- * @version 2.0
- */
 public class ComandoFine implements Comando {
 
-	private IO console;
-	private static final String NOME="fine";
-	
-	/**
-	 * Metodo che esegui il comando 
-	 * @param partita
-	 */
+	private IO io;
+	private final static String NOME = "fine";
+	public final static String MESSAGGIO_FINE = "Grazie di aver giocato!";
+
+
 	@Override
 	public void esegui(Partita partita) {
 		partita.setFinita();
-		console.mostraMessaggio("Grazie di aver giocato!"); 
+		io.mostraMessaggio(MESSAGGIO_FINE);  // si desidera smettere
+
 	}
 
 	@Override
 	public void setParametro(String parametro) {
-	}
+		// TODO Auto-generated method stub
 
-	/**
-	 * Metodo che ritorna il nome del comando
-	 * @return NOME
-	 */
-	@Override
-	public String getNome() {
-		return NOME;
 	}
 
 	@Override
 	public String getParametro() {
+		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void setIo(IO io) {
+		this.io = io;
 	}
 	
 	@Override
-	public void setIO(IO io) {
-		this.console=io;
+	public String getNome() {
+		return NOME;
 	}
 
 }

@@ -1,51 +1,55 @@
 package it.uniroma3.diadia.ambienti;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.giocatore.Borsa;
 
-class StanzaBloccataTest {
+public class StanzaBloccataTest {
 
-	Stanza s1;
-	Stanza s2;
-	Attrezzo chiave;
-	Borsa borsa;
+	private StanzaBloccata sb;
+	private Stanza s;
+	private Attrezzo a;
 	
-	@BeforeEach
-	void setUp() throws Exception {
-		s1=new StanzaBloccata("salone", "nord", "chiave");
-		s2=new Stanza("bagno");
-		borsa=new Borsa(15);
-		chiave=new Attrezzo("chiave", 5);
-		s1.impostaStanzaAdiacente("nord", s2);
-		
-		
+	@Before
+	public void setUp() throws Exception {
+		sb = new StanzaBloccata("StanzaBloccata", "ovest", "grimaldello");
+		s = new Stanza("Stanzetta");
+		a = new Attrezzo("grimaldello", 1);
+		sb.impostaStanzaAdiacente("ovest", s);
 		
 	}
 
-	@Test
-	void testGetStanzaAdiacente() {
-		s1.addAttrezzo(chiave);
-		assertEquals(s1.getStanzaAdiacente("nord"), s2);
-	}
-	
-	@Test
-	void testGetStanzaAdiacenteNo() {
-		assertEquals(s1.getStanzaAdiacente("nord"), s1);
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	void testGetDescrizioneConAttrezzo() {
-		s1.addAttrezzo(chiave);
-		assertEquals(s1.getDescrizione(), s1.toString());
+	public void testGetStanzaAdiacenteDirezioneBloccata() {
+		assertEquals(sb, sb.getStanzaAdiacente("ovest"));
 	}
 	
 	@Test
-	void testGetDescrizioneSenzaAttrezzo() {
-		assertNotEquals(s1.getDescrizione(), s1.toString());
+	public void testGetStanzaAdiacenteDirezioneSbloccata() {
+		sb.addAttrezzo(a);
+		assertEquals(s, sb.getStanzaAdiacente("ovest"));
+		
+	}
+
+	@Test
+	public void testGetDescrizioneDirezioneSbloccata() {
+		sb.addAttrezzo(a);
+		assertEquals(sb.toString(), sb.getDescrizione());
+	}
+	
+	@Test
+	public void testGetDescrizioneDirezioneBloccata() {
+		String e = "Stanza bloccata nella direzione: ovest"+"\nPrendi il grimaldello e posalo nella stanza";
+		assertEquals(e, sb.getDescrizione());
+		
 	}
 
 }

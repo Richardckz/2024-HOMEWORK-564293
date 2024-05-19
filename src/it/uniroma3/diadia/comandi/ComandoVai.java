@@ -1,83 +1,58 @@
 package it.uniroma3.diadia.comandi;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.giocatore.Giocatore;
 
-
-/**
- * ComandoVai - classe che crea un comando e sposta un giocatore da una stanza all'altra
- * 
- * @author 564293
- * 
- * @see Comando
- * @see IO
- * @see Partita
- * @see Stanza
- * 
- * @version 2.0
- */
 public class ComandoVai implements Comando {
-	private String direzione;
-	private static final String NOME="vai";
-	private IO console;
 	
+	private String direzione;
+	private IO io;
+	private final static String NOME = "vai";
+
 	/**
-	*Metodo che esegue il comando, se la direzione non esiste stampa un messaggio, se esiste verifica se
-	*esiste una stanza adiacente allora il giocatore si sposta
-	*
-	* @param partita
-	*/
+	 * esecuzione del comando
+	 */
 	@Override
 	public void esegui(Partita partita) {
-		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null;
-		if(direzione==null) {
-			console.mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
+		if (this.direzione == null) {
+			this.io.mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
+		}
+
+		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.direzione);
+		if (prossimaStanza == null) {
+			this.io.mostraMessaggio("Direzione inesistente");
 			return;
 		}
-		prossimaStanza=stanzaCorrente.getStanzaAdiacente(this.direzione);
-		if(prossimaStanza==null) {
-			console.mostraMessaggio("Direzione inesistente");
-			return;
-		}
-		
-		partita.getLabirinto().setStanzaCorrente(prossimaStanza);
-		console.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getNome());
-		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
-	
+
+		partita.setStanzaCorrente(prossimaStanza);
+		this.io.mostraMessaggio(partita.getStanzaCorrente().getNome());
+		Giocatore giocatore = partita.getGiocatore();
+		giocatore.setCfu(giocatore.getCfu() - 1);
 	}
 	
-	/**
-	 * Metodo che imposta un parametro come la direzione
-	 * 
-	 * @param parametro
-	 */
 	@Override
 	public void setParametro(String parametro) {
 		this.direzione = parametro;
 	}
-
-	/**
-	 * Metodo che ritorna il nome del comando
-	 * @return NOME
-	 */
-	@Override
-	public String getNome() {
-		return NOME;
-	}
-
-	/**
-	 * Metodo che ritorna il parametro
-	 * @return direzione
-	 */
+	
 	@Override
 	public String getParametro() {
 		return this.direzione;
 	}
+
+	@Override
+	public void setIo(IO io) {
+		this.io = io;
+		
+	}
 	
 	@Override
-	public void setIO(IO io) {
-		this.console=io;
+	public String getNome() {
+		return NOME;
 	}
 
 }
